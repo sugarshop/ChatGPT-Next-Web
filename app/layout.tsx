@@ -2,8 +2,8 @@
 import "./styles/globals.scss";
 import "./styles/markdown.scss";
 import "./styles/highlight.scss";
-import { getClientConfig } from "./config/client";
-import { type Metadata } from 'next';
+import { ClerkProvider} from "@clerk/nextjs";
+import {type Metadata} from "next";
 
 export const metadata: Metadata = {
   title: "ChatGPT Next Web",
@@ -29,6 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+      <ClerkProvider>
     <html lang="en">
       <head>
         <meta name="config" content={JSON.stringify(getClientConfig())} />
@@ -37,5 +38,6 @@ export default function RootLayout({
       </head>
       <body>{children}</body>
     </html>
+      </ClerkProvider>
   );
 }
