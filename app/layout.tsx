@@ -2,7 +2,6 @@
 import "./styles/globals.scss";
 import "./styles/markdown.scss";
 import "./styles/highlight.scss";
-import { getClientConfig } from "./config/client";
 import { ClerkProvider} from "@clerk/nextjs";
 import {type Metadata} from "next";
 
