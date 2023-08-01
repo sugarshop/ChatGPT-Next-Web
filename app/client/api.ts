@@ -115,6 +115,11 @@ export class ClientApi {
       method: "POST",
     });
 
+    if (res.status === 401) {
+      window.location.href = "/sign-in";
+      return;
+    }
+
     const resJson = await res.json();
     console.log("[Share]", resJson);
     if (resJson.id) {

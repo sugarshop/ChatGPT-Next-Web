@@ -82,6 +82,7 @@ import { ChatCommandPrefix, useChatCommand, useCommand } from "../command";
 import { prettyObject } from "../utils/format";
 import { ExportMessageModal } from "./exporter";
 import { getClientConfig } from "../config/client";
+import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
 
 const Markdown = dynamic(async () => (await import("./markdown")).Markdown, {
   loading: () => <LoadingIcon />,
@@ -612,6 +613,8 @@ export function Chat() {
     setHitBottom(isTouchBottom);
   };
 
+  const { isSignedIn } = useAuth();
+
   // prompt hints
   const promptStore = usePromptStore();
   const [promptHints, setPromptHints] = useState<RenderPompt[]>([]);
@@ -1021,6 +1024,15 @@ export function Chat() {
               />
             </div>
           )}
+          <div className="window-action-button">
+            {isSignedIn ? (
+              <UserButton afterSignOutUrl="/sign-in" />
+            ) : (
+              <div className={styles["sign-button"]}>
+                <SignInButton />
+              </div>
+            )}
+          </div>
         </div>
 
         <PromptToast

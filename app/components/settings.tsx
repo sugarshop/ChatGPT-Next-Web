@@ -49,6 +49,7 @@ import { Avatar, AvatarPicker } from "./emoji";
 import { getClientConfig } from "../config/client";
 import { useSyncStore } from "../store/sync";
 import { nanoid } from "nanoid";
+import { useAuth } from "@clerk/nextjs";
 
 function EditPromptModal(props: { id: string; onClose: () => void }) {
   const promptStore = usePromptStore();
@@ -365,10 +366,12 @@ export function Settings() {
   const [shouldShowPromptModal, setShowPromptModal] = useState(false);
 
   const showUsage = accessStore.isAuthorized();
+
+  const { isSignedIn } = useAuth();
   useEffect(() => {
     // checks per minutes
     checkUpdate();
-    showUsage && checkUsage();
+    showUsage && isSignedIn && checkUsage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -677,7 +680,7 @@ export function Settings() {
                   : Locale.Settings.Usage.NoAccess
               }
             >
-              {!showUsage || loadingUsage ? (
+              {!showUsage || loadingUsage || !isSignedIn ? (
                 <div />
               ) : (
                 <IconButton
