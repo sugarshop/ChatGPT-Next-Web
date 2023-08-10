@@ -33,11 +33,11 @@ export function auth(req: NextRequest) {
   const hashedCode = md5.hash(accessCode ?? "").trim();
 
   const serverConfig = getServerSideConfig();
-  console.log("[Auth] allowed hashed codes: ", [...serverConfig.codes]);
-  console.log("[Auth] got access code:", accessCode);
-  console.log("[Auth] hashed access code:", hashedCode);
-  console.log("[User IP] ", getIP(req));
-  console.log("[Time] ", new Date().toLocaleString());
+  console.error("[Auth] allowed hashed codes: ", [...serverConfig.codes]);
+  console.error("[Auth] got access code:", accessCode);
+  console.error("[Auth] hashed access code:", hashedCode);
+  console.error("[User IP] ", getIP(req));
+  console.error("[Time] ", new Date().toLocaleString());
 
   if (serverConfig.needCode && !serverConfig.codes.has(hashedCode) && !token) {
     return {
@@ -49,14 +49,15 @@ export function auth(req: NextRequest) {
   // if user does not provide an api key, inject system api key
   if (!token) {
     const apiKey = serverConfig.apiKey;
+    console.error("apiKey---", apiKey);
     if (apiKey) {
-      console.log("[Auth] use system api key");
+      console.error("[Auth] use system api key");
       req.headers.set("Authorization", `Bearer ${apiKey}`);
     } else {
-      console.log("[Auth] admin did not provide an api key");
+      console.error("[Auth] admin did not provide an api key");
     }
   } else {
-    console.log("[Auth] use user api key");
+    console.error("[Auth] use user api key");
   }
 
   return {

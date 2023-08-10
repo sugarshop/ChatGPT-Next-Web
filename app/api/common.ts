@@ -20,11 +20,11 @@ export async function requestOpenai(req: NextRequest) {
     baseUrl = `${PROTOCOL}://${baseUrl}`;
   }
 
-  console.log("[Proxy] ", openaiPath);
-  console.log("[Base Url]", baseUrl);
+  console.error("[Proxy] ", openaiPath);
+  console.error("[Base Url]", baseUrl);
 
   if (process.env.OPENAI_ORG_ID) {
-    console.log("[Org ID]", process.env.OPENAI_ORG_ID);
+    console.error("[Org ID]", process.env.OPENAI_ORG_ID);
   }
 
   const timeoutId = setTimeout(() => {
@@ -48,6 +48,8 @@ export async function requestOpenai(req: NextRequest) {
     signal: controller.signal,
   };
 
+  console.error("fetchUrl:", fetchUrl);
+  console.error("fetchOption:", fetchOptions);
   // #1815 try to refuse gpt4 request
   if (DISABLE_GPT4 && req.body) {
     try {
@@ -81,6 +83,10 @@ export async function requestOpenai(req: NextRequest) {
     // to disable nginx buffering
     newHeaders.set("X-Accel-Buffering", "no");
 
+    console.error("res.body:", res.body);
+    console.error("res.status:", res.status);
+    console.error("res.statusText:", res.statusText);
+    console.error("newHeaders:", newHeaders);
     return new Response(res.body, {
       status: res.status,
       statusText: res.statusText,
