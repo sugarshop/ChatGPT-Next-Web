@@ -7,6 +7,7 @@ import { getServerSideConfig } from "./config/server";
 const serverConfig = getServerSideConfig();
 
 export default async function App() {
+  console.error("serverConfig: " + serverConfig);
   console.error(
     "NEXT_PUBLIC_CLERK_SIGN_UP_URL",
     process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
