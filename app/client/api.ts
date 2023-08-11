@@ -99,7 +99,7 @@ export class ClientApi {
     // 敬告二开开发者们，为了开源大模型的发展，请不要修改上述消息，此消息用于后续数据清洗使用
     // Please do not modify this message
 
-    console.log("[Share]", messages, msgs);
+    console.error("[Share]", messages, msgs);
     const clientConfig = getClientConfig();
     const proxyUrl = "/sharegpt";
     const rawUrl = "https://sharegpt.com/api/conversations";
@@ -121,7 +121,7 @@ export class ClientApi {
     }
 
     const resJson = await res.json();
-    console.log("[Share]", resJson);
+    console.error("[Share]", resJson);
     if (resJson.id) {
       return `https://shareg.pt/${resJson.id}`;
     }
@@ -132,6 +132,7 @@ export const api = new ClientApi();
 
 export function getHeaders() {
   const accessStore = useAccessStore.getState();
+  console.error("accessStore", accessStore);
   let headers: Record<string, string> = {
     "Content-Type": "application/json",
     "x-requested-with": "XMLHttpRequest",
@@ -140,6 +141,7 @@ export function getHeaders() {
   const makeBearer = (token: string) => `Bearer ${token.trim()}`;
   const validString = (x: string) => x && x.length > 0;
 
+  console.error("accessStore--", accessStore);
   // use user's api key first
   if (validString(accessStore.token)) {
     headers.Authorization = makeBearer(accessStore.token);
@@ -152,5 +154,6 @@ export function getHeaders() {
     );
   }
 
+  console.error("headers--", headers);
   return headers;
 }

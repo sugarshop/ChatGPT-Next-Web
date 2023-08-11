@@ -743,7 +743,7 @@ export function Chat() {
 
       // auto sync mask config from global config
       if (session.mask.syncGlobalConfig) {
-        console.log("[Mask] syncing from global, name = ", session.mask.name);
+        console.error("[Mask] syncing from global, name = ", session.mask.name);
         session.mask.modelConfig = { ...config.modelConfig };
       }
     });
@@ -925,7 +925,7 @@ export function Chat() {
       doSubmit(text);
     },
     code: (text) => {
-      console.log("[Command] got code from url: ", text);
+      console.error("[Command] got code from url: ", text);
       showConfirm(Locale.URLCommand.Code + `code = ${text}`).then((res) => {
         if (res) {
           accessStore.updateCode(text);
@@ -939,7 +939,7 @@ export function Chat() {
           url?: string;
         };
 
-        console.log("[Command] got settings from url: ", payload);
+        console.error("[Command] got settings from url: ", payload);
 
         if (payload.key || payload.url) {
           showConfirm(

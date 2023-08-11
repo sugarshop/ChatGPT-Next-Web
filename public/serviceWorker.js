@@ -1,7 +1,7 @@
 const CHATGPT_NEXT_WEB_CACHE = "chatgpt-next-web-cache";
 
 self.addEventListener("activate", function (event) {
-  console.log("ServiceWorker activated.");
+  console.error("ServiceWorker activated.");
 });
 
 self.addEventListener("install", function (event) {

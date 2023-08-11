@@ -38,7 +38,7 @@ export function Mermaid(props: { code: string }) {
     if (!svg) return;
     const text = new XMLSerializer().serializeToString(svg);
     const blob = new Blob([text], { type: "image/svg+xml" });
-    console.log(blob);
+    console.error(blob);
     // const url = URL.createObjectURL(blob);
     // const win = window.open(url);
     // if (win) {

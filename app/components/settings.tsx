@@ -333,8 +333,8 @@ export function Settings() {
       setCheckingUpdate(false);
     });
 
-    console.log("[Update] local version ", updateStore.version);
-    console.log("[Update] remote version ", updateStore.remoteVersion);
+    console.error("[Update] local version ", updateStore.version);
+    console.error("[Update] remote version ", updateStore.remoteVersion);
   }
 
   const usage = {

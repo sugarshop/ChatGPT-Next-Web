@@ -444,7 +444,7 @@ export function ImagePreviewer(props: {
           link.click();
         }
       })
-      .catch((e) => console.log("[Export Image] ", e));
+      .catch((e) => console.error("[Export Image] ", e));
   };
 
   return (

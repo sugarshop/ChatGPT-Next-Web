@@ -279,7 +279,7 @@ export const useChatStore = create<ChatStore>()(
         const modelConfig = session.mask.modelConfig;
 
         const userContent = fillTemplateWith(content, modelConfig);
-        console.log("[User Input] after template: ", userContent);
+        console.error("[User Input] after template: ", userContent);
 
         const userMessage: ChatMessage = createMessage({
           role: "user",
@@ -399,7 +399,7 @@ export const useChatStore = create<ChatStore>()(
             ]
           : [];
         if (shouldInjectSystemPrompts) {
-          console.log(
+          console.error(
             "[Global System Prompt] ",
             systemPrompts.at(0)?.content ?? "empty",
           );
@@ -534,7 +534,7 @@ export const useChatStore = create<ChatStore>()(
 
         const lastSummarizeIndex = session.messages.length;
 
-        console.log(
+        console.error(
           "[Chat History] ",
           toBeSummarizedMsgs,
           historyMsgLength,
@@ -558,7 +558,7 @@ export const useChatStore = create<ChatStore>()(
               session.memoryPrompt = message;
             },
             onFinish(message) {
-              console.log("[Memory] ", message);
+              console.error("[Memory] ", message);
               session.lastSummarizeIndex = lastSummarizeIndex;
             },
             onError(err) {

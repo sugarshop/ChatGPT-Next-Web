@@ -171,7 +171,7 @@ export function Home() {
   useLoadData();
 
   useEffect(() => {
-    console.log("[Config] got config from build time", getClientConfig());
+    console.error("[Config] got config from build time", getClientConfig());
     useAccessStore.getState().fetch();
   }, []);
 
