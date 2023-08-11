@@ -589,6 +589,49 @@ export function EditMessageModal(props: { onClose: () => void }) {
 export function Chat() {
   type RenderMessage = ChatMessage & { preview?: boolean };
 
+  console.error(
+    "NEXT_PUBLIC_CLERK_SIGN_UP_URL",
+    process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+    typeof window === "undefined",
+    "999",
+  );
+  console.error(
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    typeof window === "undefined",
+    "999",
+  );
+  console.error(
+    "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL",
+    process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
+    typeof window === "undefined",
+    "999",
+  );
+  console.error(
+    "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL",
+    process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
+    typeof window === "undefined",
+    "999",
+  );
+  console.error(
+    "NEXT_PUBLIC_CLERK_SIGN_IN_URL",
+    process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
+    typeof window === "undefined",
+    "999",
+  );
+  console.error(
+    "OPENAI_API_KEY",
+    process.env.OPENAI_API_KEY,
+    typeof window === "undefined",
+    "999",
+  );
+  console.error(
+    "CLERK_SECRET_KEY",
+    process.env.CLERK_SECRET_KEY,
+    typeof window === "undefined",
+    "999",
+  );
+
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [
     state.currentSession(),
